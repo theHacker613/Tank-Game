@@ -1,0 +1,76 @@
+<html> 
+    <canvas id="canvas" width="1000" height="500" style="border: 5px solid;"></canvas>
+
+    <!-- <form> -->
+        <label for="x">X:</label>
+        <input type="number" id="x" name="x"><br><br>
+
+        <label for="y">y:</label>
+        <input type="number" id="y" name="y"><br><br>
+
+        <label for="power">power:</label>
+        <input type="number" id="power" name="power"><br><br>
+
+        
+        
+        <button id="Fire" onclick="Fire()">Fire! </button>
+      <!-- </form> -->
+      
+    <script>
+        const canvas = document.getElementById("canvas")
+        const ctx = canvas.getContext("2d")
+
+
+        let x = document.getElementById("x")
+        let y = document.getElementById("y")
+        let power = document.getElementById("power")
+
+        let tank = new Image()
+        tank.src = "tank.png"
+        
+       
+        let target = new Image()
+        target.src = "target.png"
+        
+       
+        let xp = {
+            x: 0,
+            y: 0,
+            w: 50,
+            h: 50,
+        };
+
+        
+
+        function Fire(){
+            console.log(x)
+            console.log("x, y, power - values: ", x.valueAsNumber, y.valueAsNumber, power.valueAsNumber ) //valueByNumber
+
+            xp.x = x.valueAsNumber*power.valueAsNumber 
+           xp.y = y.valueAsNumber*power.valueAsNumber 
+
+
+            console.log("x")
+
+        }
+
+        function draw(){
+
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height)        
+            
+            ctx.fillStyle = "green"
+            ctx.fillRect(0, 0, 1000, 500)
+
+            ctx.fillStyle = "red"
+            ctx.fillRect(xp.x, xp.y, xp.w, xp.h)
+          
+            ctx.drawImage(tank, 100, 200)          //canvas.width/10  canvas.height/3
+
+            ctx.drawImage(target, 700, 200)//canvas.width*9/10
+            requestAnimationFrame(draw)
+        }
+        draw()
+            
+    </script>
+</html>
